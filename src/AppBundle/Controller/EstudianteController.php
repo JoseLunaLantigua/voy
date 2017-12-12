@@ -26,6 +26,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class EstudianteController extends Controller
 {
     /**
+     * @Route("/lista", name="listar_estudiante")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function ListarEstudiant(Request $request)
+    {
+        //TODO:buscar lista de estudiante en la base de datos.
+        $estudiantes = $this ->getDoctrine()->getRepository(Estudiante::class)->findAll();
+
+        return $this->render('AppBundle:Estudiante:estudiante_lista.html.twig',array('estudiantes'
+        => $estudiantes,));
+    }
+
+    /**
      * @Route("/", name="crear_estudiante")
      * @Method("POST")
      * @param Request $request
@@ -64,6 +78,8 @@ class EstudianteController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
+
+
     public function getEstudiantes(Request $request){
         $estudiantes=$this->getDoctrine()->getRepository(Estudiante::class )->findAll();
         $data= $this->get("serializer")->serialize($estudiantes,'json');
@@ -74,5 +90,8 @@ class EstudianteController extends Controller
 
 
 
+
     }
+
+
 }

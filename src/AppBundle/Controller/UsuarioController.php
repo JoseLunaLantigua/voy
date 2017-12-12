@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UsuarioController extends Controller
 {
     /**
-     * @Route("/usuario/{id}", name="homepage")
+     * @Route("/{id}", name="homepage")
      */
     public function indexAction(Request $request,$id )
     {
@@ -33,30 +33,13 @@ class UsuarioController extends Controller
             'nombreUsuario2' => $nombreUsuario,
         ));
     }
-    /**
-     * @Route("/usuarios/", name="Userhomepage")
-     */
-    public function index1Action(Request $request )
-    {
-
-        $nombreUsuario="Liz Tejada";
-        $nombreUsuario2='Jose Peña';
-        $id=1;
-        // replace this example code with whatever you need
-        return $this->render('AppBundle:Usuarios:usuarios.html.twig', array(
-            'id' => $id,
-            'nombreUsuario' => $nombreUsuario2,
-            'nombreUsuario2' => $nombreUsuario,
-        ));
-    }
-
-
 
 
     /**
-     * @Route("/add/",name="addUsuario")
+     * @Route("/", name="addUsuario")
      * @Method("POST")
      * @param Request $request
+     * @return JsonResponse
      */
     public function addUsuario(Request $request){
 

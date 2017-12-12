@@ -7,7 +7,7 @@
     <form>
 
         {# Input oculto para mantener el ID del Usuario #}
-        <input type="hidden" value="{estudiante.id}">
+        <input type="hidden" value="{{ estudiante.id}}" id="id">
 
 
         <div class="form-group">
@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <label for="edad">Edad</label>
-            <input type="edad" class="form-control" id="email" placeholder="Email" value="{{estudiante.edad }}">
+            <input type="text" class="form-control" id="edad" placeholder="edad" value="{{estudiante.edad }}">
         </div>
 
 
@@ -36,15 +36,17 @@
 
         function  addUser(estudiante) {
 
+            console.log(estudiante);
+           // return;
             $.ajax({
-                type: "POST",
+                type: "PUT",
                 data: JSON.stringify(estudiante),
-                url: "http://voy/app_dev.php/estudiante/",
+                url: "http://voy/app_dev.php/estudiante/"+estudiante.id,
                 error: function() {
 
                 },
-                success: function (estudiante) {
-                    console.log(estudiante);
+                success: function (data) {
+                    console.log(data);
                 }
             });
 
@@ -56,13 +58,13 @@
 
                 var nombre = $('#nombre').val();
                 var edad = $('#edad').val();
+                var id=$('#id').val();
 
-                //  alert(name+", "+email);
+                alert(nombre+", "+edad);
 
-                addUser({ nombre : nombre, edad: edad});
+                addUser({ nombre : nombre, edad: edad,id:id});
 
             });
-
 
         });
     </script>

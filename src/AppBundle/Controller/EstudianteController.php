@@ -39,6 +39,34 @@ class EstudianteController extends Controller
         => $estudiantes,));
     }
 
+
+    /**
+     * @Route("/{id}", name="get_estudiante", requirements={"id"="\d+"})
+     * @Method("GET")
+     * @param Request $request
+     * @param Estudiante $estudiante
+     * @return JsonResponse
+     */
+    public function getEstudiante(Request $request, Estudiante $estudiante)
+    {
+        $estudiantej=json_decode($this->get('serializer')->serialize($estudiante,'json'),true);
+        return new JsonResponse($estudiantej);
+
+    }
+
+    /**
+     * @Route("/{id}/edit", name="edit_estudiante", requirements={"id"="\d+"})
+     * @Method("GET")
+     * @param Request $request
+     * @param Estudiante $estudiante
+     * @return JsonResponse
+     */
+    public function editEstudiante(Request $request, Estudiante $estudiante)
+    {
+        return $this->render('AppBundle:Estudiante:edit_estudiante.html.twig',array("estudiante"=>$estudiante));
+
+    }
+
     /**
      * @Route("/", name="crear_estudiante")
      * @Method("POST")
@@ -49,7 +77,9 @@ class EstudianteController extends Controller
         //die;
         $data=json_decode($request->getContent(),true);
         $estudiante=new Estudiante();
+
         $form =$this->createForm(EstudianteType::class, $estudiante);
+
         $form->submit($data);
         if($form->isValid()){
             //echo "siiiiiiiiiiii";
@@ -62,11 +92,10 @@ class EstudianteController extends Controller
         }
         //para mostrar el objeto estudiante en la respuesta, como un Objeto del tipo Estudiante
         // dump($estudiante);
-        //para devolverlo como un JSON//
-        $data= $this->get("serializer")->serialize($estudiante,'json');
+        //para devolverlo como un JSON
 
-        $newEstudiante=json_decode($data,true);
-        return new JsonResponse($newEstudiante);
+        $data=json_decode( $this->get("serializer")->serialize($estudiante,'json'),true);
+        return new JsonResponse($data);
 
 
 
@@ -86,9 +115,6 @@ class EstudianteController extends Controller
 
         $listaEstudiantes=json_decode($data,true);
         return new JsonResponse($listaEstudiantes);
-
-
-
 
 
     }

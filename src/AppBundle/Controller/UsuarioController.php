@@ -23,8 +23,8 @@ class UsuarioController extends Controller
     public function indexAction(Request $request,$id )
     {
         
-        $nombreUsuario="Liz Tejada";
-        $nombreUsuario2='Jose Peña';
+        $nombreUsuario="JMLUNA";
+        $nombreUsuario2='JoseMiguel';
         $idUsuario=$id;
         // replace this example code with whatever you need
         return $this->render('AppBundle::usuarios.html.twig', array(
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
             $em->flush();
         }else{
             echo $form->getErrorsAsString();
-              echo "nooooooooo";
+             // echo "nooooooooo";
             dump($data);
             die;
 

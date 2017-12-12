@@ -3,9 +3,34 @@
 {% block body %}
 
     <h1>Lista de Estudiantes</h1>
-<lu>
-    {% for estudiantes in estudiantes  %}
-    <li>{{ estudiantes.nombre}}</li>
-    {% endfor %}
-</lu>
+
+
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Accinoes</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for estudiantes in estudiantes  %}
+            <tr>
+                <th scope="col">
+                    {{ estudiantes.id }}
+                </th>
+                <td> {{ estudiantes.nombre }}</td>
+                <td>{{  estudiantes.edad}}</td>
+                <td><a href="http://voy/app_dev.php/estudiante/{{estudiantes.id}}/edit"class="btn btn-primary">editar </a></td>
+
+            </tr>
+
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
 {% endblock %}
